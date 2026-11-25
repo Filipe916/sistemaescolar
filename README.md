@@ -1,6 +1,6 @@
-# Portal Escolar
+# Nexo Escolar
 
-Protótipo de um portal de gestão escolar feito com HTML, CSS e JavaScript. A interface funciona no navegador, sem etapa de compilação ou instalação de dependências.
+Protótipo do Nexo Escolar, um portal de gestão educacional feito com HTML, CSS e JavaScript. A interface funciona no navegador, sem etapa de compilação ou instalação de dependências.
 
 ## Funcionalidades
 

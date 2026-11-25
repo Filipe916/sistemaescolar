@@ -60,18 +60,24 @@ const mobileMenu = document.querySelector('.layout aside');
 function closeMobileMenu() {
   mobileMenu.classList.remove('menu-open');
   mobileMenu.style.removeProperty('--menu-top');
+  mobileMenu.style.removeProperty('--menu-right');
   const toggle = $('#menuToggle');
   if (toggle) {
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Abrir menu');
   }
 }
+function positionMobileMenu(toggle) {
+  const rect = toggle.getBoundingClientRect();
+  mobileMenu.style.setProperty('--menu-top', `${Math.ceil(rect.bottom + 4)}px`);
+  mobileMenu.style.setProperty('--menu-right', `${Math.ceil(window.innerWidth - rect.right)}px`);
+}
 document.addEventListener('click', e => {
   const toggle = e.target.closest('#menuToggle');
   if (toggle) {
     const isOpen = !mobileMenu.classList.contains('menu-open');
     if (isOpen) {
-      mobileMenu.style.setProperty('--menu-top', `${Math.ceil(toggle.getBoundingClientRect().bottom + 8)}px`);
+      positionMobileMenu(toggle);
       mobileMenu.classList.add('menu-open');
     } else {
       closeMobileMenu();
@@ -82,6 +88,16 @@ document.addEventListener('click', e => {
   }
   if (!mobileMenu.contains(e.target)) closeMobileMenu();
 });
+window.addEventListener('scroll', () => {
+  if (!mobileMenu.classList.contains('menu-open')) return;
+  const toggle = $('#menuToggle');
+  const rect = toggle && toggle.getBoundingClientRect();
+  if (!rect || rect.bottom < 0 || rect.top > window.innerHeight) {
+    closeMobileMenu();
+    return;
+  }
+  positionMobileMenu(toggle);
+}, { passive: true });
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) {
     closeMobileMenu();
@@ -90,12 +106,12 @@ document.addEventListener('keydown', e => {
   }
 });
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 620) closeMobileMenu();
+  if (window.innerWidth > 760) closeMobileMenu();
 });
 function openApp() { if (!current) return; closeMobileMenu(); $('#login').classList.add('hidden'); $('#app').classList.remove('hidden'); $('#who').textContent = current.name || names[current.role]; $('#avatar').textContent = current.role[0].toUpperCase(); $('#nav').innerHTML = menus[current.role].map(x => `<button class="nav ${x[0] === page ? 'active' : ''}" data-page="${x[0]}"><span>${x[1]}</span>${x[2]}</button>`).join(''); $('#nav').querySelectorAll('button').forEach(b => b.onclick = () => { closeMobileMenu(); render(b.dataset.page) }); render(page) }
 function logout() { closeMobileMenu(); current = null; sessionStorage.removeItem('portal_demo_role'); $('#app').classList.add('hidden'); $('#login').classList.remove('hidden'); $('#pass').value = ''; $('#user').value = ''; $('#loginError').textContent = ''; }
 $('#logout').onclick = logout; $('#closeModal').onclick = () => $('#modal').classList.add('hidden');
-function head(title, sub, tag = '') { return `<div class="head"><div><div class="eyebrow">${current.role.toUpperCase()} • PORTAL ESCOLAR</div><h2>${title}</h2><div class="muted">${sub}</div></div><div class="head-tools">${tag ? `<span class="badge info">${tag}</span>` : ''}<button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span class="hamburger-icon" aria-hidden="true"></span></button></div></div>` }
+function head(title, sub, tag = '') { return `<div class="head"><div><div class="eyebrow">${current.role.toUpperCase()} • NEXO ESCOLAR</div><h2>${title}</h2><div class="muted">${sub}</div></div><div class="head-tools">${tag ? `<span class="badge info">${tag}</span>` : ''}<button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span class="hamburger-icon" aria-hidden="true"></span></button></div></div>` }
 function stat(label, val, note) { return `<div class="card"><div class="stat-label">${label}</div><div class="stat-value">${val}</div><div class="stat-note">${note}</div></div>` }
 function table(headers, rows) { return `<div class="table-wrap"><table class="table"><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.length ? rows.join('') : `<tr><td colspan="${headers.length}" class="empty">Nenhum registro encontrado.</td></tr>`}</tbody></table></div>` }
 function row(cells) { return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>` }
