@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Portal Escolar | Gestão Educacional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <section id="login">
+        <div class="login-wrap">
+            <header class="brand">
+                <div class="mark">▦</div>
+                <h1>Portal Escolar</h1>
+                <p>SISTEMA DE GESTÃO EDUCACIONAL</p>
+            </header>
+            <div class="panel">
+                <h2>Entrar no sistema</h2>
+                <p class="muted">Acesse com seu usuário e selecione o perfil de demonstração.</p>
+                <form id="loginForm">
+                    <div class="field"><label for="user">Usuário</label><input id="user" placeholder="Digite o usuário"
+                            autocomplete="username" required></div>
+                    <div class="field"><label for="pass">Senha</label><input id="pass" type="password"
+                            placeholder="Digite a senha" autocomplete="current-password" required></div>
+                    <div class="field"><label for="role">Perfil de acesso</label><select id="role">
+                            <option value="aluno">Aluno</option>
+                            <option value="professor">Professor</option>
+                            <option value="admin">Administrador</option>
+                        </select></div><button class="primary full" type="submit">ENTRAR</button>
+                    <div id="loginError" class="error"></div>
+                </form>
+                <div class="demo"><b>Contas fictícias para testar:</b><br>Aluno: <b>aluno</b> /
+                    <b>demo123</b><br>Professor: <b>professor</b> / <b>demo123</b><br>Administrador: <b>admin</b> /
+                    <b>demo123</b><br><span style="color:#8a4b12">Protótipo: não use senhas ou dados pessoais
+                        reais.</span>
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px">
+                        <button type="button" class="secondary quick-login" data-role="aluno"
+                            style="font-size:11px;padding:8px 4px">Entrar como aluno</button>
+                        <button type="button" class="secondary quick-login" data-role="professor"
+                            style="font-size:11px;padding:8px 4px">Como professor</button>
+                        <button type="button" class="secondary quick-login" data-role="admin"
+                            style="font-size:11px;padding:8px 4px">Como admin</button>
+                    </div>
+                </div>
+            </div>
+            <div class="muted" style="text-align:center;margin-top:15px;font-size:11px">Ambiente demonstrativo • Dados
+                armazenados apenas neste navegador</div>
+        </div>
+    </section>
+    <section id="app" class="hidden">
+        <header class="top">
+            <div class="top-left">
+                <div class="mark">▦</div><span>Portal Escolar</span>
+            </div>
+            <div class="top-right">
+                <div class="avatar" id="avatar">A</div><span class="who" id="who">Usuário</span><button class="logout"
+                    id="logout">Sair ↗</button>
+            </div>
+        </header>
+        <div class="layout">
+            <aside>
+                <div class="side-label">NAVEGAÇÃO</div>
+                <nav id="nav"></nav>
+            </aside>
+            <main id="main" class="main"></main>
+        </div>
+    </section>
+    <div id="modal" class="modal hidden">
+        <div class="panel">
+            <div class="modal-head">
+                <h3 id="modalTitle">Cadastro</h3><button class="close" id="closeModal">×</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
