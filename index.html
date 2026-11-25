@@ -31,17 +31,15 @@
                         </select></div><button class="primary full" type="submit">ENTRAR</button>
                     <div id="loginError" class="error"></div>
                 </form>
+                <button type="button" class="secondary full register-trigger" id="openRegister">CRIAR UMA CONTA</button>
                 <div class="demo"><b>Contas fictícias para testar:</b><br>Aluno: <b>aluno</b> /
                     <b>demo123</b><br>Professor: <b>professor</b> / <b>demo123</b><br>Administrador: <b>admin</b> /
                     <b>demo123</b><br><span style="color:#8a4b12">Protótipo: não use senhas ou dados pessoais
                         reais.</span>
-                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px">
-                        <button type="button" class="secondary quick-login" data-role="aluno"
-                            style="font-size:11px;padding:8px 4px">Entrar como aluno</button>
-                        <button type="button" class="secondary quick-login" data-role="professor"
-                            style="font-size:11px;padding:8px 4px">Como professor</button>
-                        <button type="button" class="secondary quick-login" data-role="admin"
-                            style="font-size:11px;padding:8px 4px">Como admin</button>
+                    <div class="quick-logins">
+                        <button type="button" class="secondary quick-login" data-role="aluno">Entrar como aluno</button>
+                        <button type="button" class="secondary quick-login" data-role="professor">Como professor</button>
+                        <button type="button" class="secondary quick-login" data-role="admin">Como admin</button>
                     </div>
                 </div>
             </div>
